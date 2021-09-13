@@ -108,7 +108,7 @@
             document.body.append(div);
 
             DG.then(function () {
-                return DG.plugin(['https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js']);
+                // return DG.plugin(['https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js']);
             }).then(function () {
                 var map,
                     markers = [],
@@ -125,56 +125,56 @@
                 controlTraffic = DG.control.traffic();
                 controlTraffic.addTo(map);
                 
-                var leafletCoordinates = document.querySelector('#leafletCoordinates');
-                leafletCoordinates.onclick = function parseSomeTextToObject() {
-                    try {
-                        leafletCoordinatesLatLng = JSON.parse(document.querySelector('#someText').value);
-                    } catch (error) {
+                // var leafletCoordinates = document.querySelector('#leafletCoordinates');
+                // leafletCoordinates.onclick = function parseSomeTextToObject() {
+                //     try {
+                //         leafletCoordinatesLatLng = JSON.parse(document.querySelector('#someText').value);
+                //     } catch (error) {
     
-                        leafletCoordinatesLatLng[0][0] = geo.lon[geo.lon.length - 1];
-                        leafletCoordinatesLatLng[0][1] = geo.lat[geo.lat.length - 1];
-                        leafletCoordinatesLatLng[1][0] = geo.lon[0];
-                        leafletCoordinatesLatLng[1][1] = geo.lat[0];
-                    }
-                }
+                //         leafletCoordinatesLatLng[0][0] = geo.lon[geo.lon.length - 1];
+                //         leafletCoordinatesLatLng[0][1] = geo.lat[geo.lat.length - 1];
+                //         leafletCoordinatesLatLng[1][0] = geo.lon[0];
+                //         leafletCoordinatesLatLng[1][1] = geo.lat[0];
+                //     }
+                // }
                 
-                var routing = document.querySelector('#route_it');
-                routing.onclick = function () {
-                    if (routingControl) {
-                        map.removeControl(routingControl);
-                        routingControl = null;
-                    }
-                    routingControl = L.Routing.control({
-                        waypoints: [
-                            L.latLng(leafletCoordinatesLatLng[0][0], leafletCoordinatesLatLng[0][1]),
-                            L.latLng(leafletCoordinatesLatLng[1][0], leafletCoordinatesLatLng[1][1])
-                        ],
-                        lineOptions: { styles: [{ color: 'black', opacity: 0.5, weight: 5 }] },
-                        createMarker: function () {
-                            return false;
-                            //Затычка, что бы не создавались маркеры для waypoints
-                        }
-                    }).addTo(map);
+                // var routing = document.querySelector('#route_it');
+                // routing.onclick = function () {
+                //     if (routingControl) {
+                //         map.removeControl(routingControl);
+                //         routingControl = null;
+                //     }
+                //     routingControl = L.Routing.control({
+                //         waypoints: [
+                //             L.latLng(leafletCoordinatesLatLng[0][0], leafletCoordinatesLatLng[0][1]),
+                //             L.latLng(leafletCoordinatesLatLng[1][0], leafletCoordinatesLatLng[1][1])
+                //         ],
+                //         lineOptions: { styles: [{ color: 'black', opacity: 0.5, weight: 5 }] },
+                //         createMarker: function () {
+                //             return false;
+                //             //Затычка, что бы не создавались маркеры для waypoints
+                //         }
+                //     }).addTo(map);
 
-                    routingControl.on('routesfound', function (e) {
-                        var routes = e.routes;
-                        var summary = routes[0].summary;
-                        // alert distance and time in km and minutes
-                        //alert('Total distance is ' + summary.totalDistance / 1000 + ' km and total time is ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes');
-                    });
-                }
+                //     routingControl.on('routesfound', function (e) {
+                //         var routes = e.routes;
+                //         var summary = routes[0].summary;
+                //         // alert distance and time in km and minutes
+                //         //alert('Total distance is ' + summary.totalDistance / 1000 + ' km and total time is ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes');
+                //     });
+                // }
 
-                var hideRoutingContainer = document.querySelector('#hideRouteContainer');
-                hideRoutingContainer.onclick = () => {
-                    var routingContainer = document.querySelector('.leaflet-routing-alternatives-container');
-                    var routingContainer = routingContainer.parentNode;
-                    console.log(routingContainer.style.display);
-                    if (routingContainer.style.display == 'block' || routingContainer.style.display == "") {
-                        routingContainer.style.display = 'none';
-                    } else {
-                        routingContainer.style.display = 'block';
-                    }
-                }
+                // var hideRoutingContainer = document.querySelector('#hideRouteContainer');
+                // hideRoutingContainer.onclick = () => {
+                //     var routingContainer = document.querySelector('.leaflet-routing-alternatives-container');
+                //     var routingContainer = routingContainer.parentNode;
+                //     console.log(routingContainer.style.display);
+                //     if (routingContainer.style.display == 'block' || routingContainer.style.display == "") {
+                //         routingContainer.style.display = 'none';
+                //     } else {
+                //         routingContainer.style.display = 'block';
+                //     }
+                // }
 
                 ///////////////GIS Маршрутизация///////////////////////////////////////
                 let addLine = document.querySelector('#addLine');
