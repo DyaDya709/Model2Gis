@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <title>Document</title>
 </head>
 
@@ -17,7 +18,6 @@
     <input id="addLine" type="button" value="add line" hidden />
     <input id='hideRouteContainer' type="button" value="Показать/скрыть контейнер" hidden/>
     <input id='leafletCoordinates' type="button" value="leafletCoordinates" hidden/>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <script>
       	var leafletCoordinatesLatLng = [[],[]];
         var geo = {
