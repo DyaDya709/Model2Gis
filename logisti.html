@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
     <title>Document</title>
 </head>
 
@@ -17,7 +17,7 @@
     <input id="hide_route_it" type="button" value="hide route_it" hidden/>
     <input id="addLine" type="button" value="add line" hidden />
     <input id='hideRouteContainer' type="button" value="Показать/скрыть контейнер" hidden/>
-    <input id='leafletCoordinates' type="button" value="leafletCoordinates" hidden/>
+
     <script>
       	var leafletCoordinatesLatLng = [[],[]];
         var geo = {
@@ -93,10 +93,6 @@
                 return geo.lon[index] + ',' + geo.lat[index];
             }
         };
-
-        //geo.addGeo(55.590134, 37.547486);
-        //geo.addGeo(55.591493, 37.547872);
-
         function setMarker() {
             let divOld = document.querySelector('#map');
             if (divOld) {
@@ -108,7 +104,6 @@
             document.body.append(div);
 
             DG.then(function () {
-                // return DG.plugin(['https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js']);
             }).then(function () {
                 var map,
                     markers = [],
@@ -119,62 +114,12 @@
                     clickedElement = document.querySelector('#clicked_element');
                 map = DG.map('map', {
                     center: [geo.lon[geo.lon.length - 1], geo.lat[geo.lat.length - 1]],
-                    // center: myCenter(),
                     zoom: 10
                 });
                 controlTraffic = DG.control.traffic();
                 controlTraffic.addTo(map);
                 
-                // var leafletCoordinates = document.querySelector('#leafletCoordinates');
-                // leafletCoordinates.onclick = function parseSomeTextToObject() {
-                //     try {
-                //         leafletCoordinatesLatLng = JSON.parse(document.querySelector('#someText').value);
-                //     } catch (error) {
-    
-                //         leafletCoordinatesLatLng[0][0] = geo.lon[geo.lon.length - 1];
-                //         leafletCoordinatesLatLng[0][1] = geo.lat[geo.lat.length - 1];
-                //         leafletCoordinatesLatLng[1][0] = geo.lon[0];
-                //         leafletCoordinatesLatLng[1][1] = geo.lat[0];
-                //     }
-                // }
-                
-                // var routing = document.querySelector('#route_it');
-                // routing.onclick = function () {
-                //     if (routingControl) {
-                //         map.removeControl(routingControl);
-                //         routingControl = null;
-                //     }
-                //     routingControl = L.Routing.control({
-                //         waypoints: [
-                //             L.latLng(leafletCoordinatesLatLng[0][0], leafletCoordinatesLatLng[0][1]),
-                //             L.latLng(leafletCoordinatesLatLng[1][0], leafletCoordinatesLatLng[1][1])
-                //         ],
-                //         lineOptions: { styles: [{ color: 'black', opacity: 0.5, weight: 5 }] },
-                //         createMarker: function () {
-                //             return false;
-                //             //Затычка, что бы не создавались маркеры для waypoints
-                //         }
-                //     }).addTo(map);
-
-                //     routingControl.on('routesfound', function (e) {
-                //         var routes = e.routes;
-                //         var summary = routes[0].summary;
-                //         // alert distance and time in km and minutes
-                //         //alert('Total distance is ' + summary.totalDistance / 1000 + ' km and total time is ' + Math.round(summary.totalTime % 3600 / 60) + ' minutes');
-                //     });
-                // }
-
-                // var hideRoutingContainer = document.querySelector('#hideRouteContainer');
-                // hideRoutingContainer.onclick = () => {
-                //     var routingContainer = document.querySelector('.leaflet-routing-alternatives-container');
-                //     var routingContainer = routingContainer.parentNode;
-                //     console.log(routingContainer.style.display);
-                //     if (routingContainer.style.display == 'block' || routingContainer.style.display == "") {
-                //         routingContainer.style.display = 'none';
-                //     } else {
-                //         routingContainer.style.display = 'block';
-                //     }
-                // }
+         
 
                 ///////////////GIS Маршрутизация///////////////////////////////////////
                 let addLine = document.querySelector('#addLine');
@@ -196,15 +141,6 @@
                     });
                     polyLine.addTo(map);
                     map.fitBounds(polyLine.getBounds());
-                    //polyLine.addEventListener('mouseover', () => {
-                    //    alert(document.querySelector('#someText').value);
-                    //});
-
-                    //map.removeControl(controlTraffic);
-                    //controlTraffic = null;
-                    //controlTraffic = DG.control.traffic();
-                    //controlTraffic.addTo(map);
-
                 }
                 ///////////////////////////////////////////////////////////////
 
@@ -235,7 +171,7 @@
 
                 finishIcon = DG.icon({
                     iconUrl: 'http://1c.bbus-service.ru/pict/finish_red.png',
-                    //iconUrl: 'https://www.pngkey.com/png/full/236-2363407_free-red-check-icon-png-map-mark-png.png',
+                    
                     iconSize: [25, 41],
                     iconAnchor: [12, 41],
                     popupAnchor: [1, -34],
@@ -243,7 +179,7 @@
 
                 startIcon = DG.icon({
                     iconUrl: 'http://1c.bbus-service.ru/pict/point_green.png',
-                    //iconUrl: 'https://img.computersm.com/img/around-the-home/how-to-place-markers-on-google-maps-5.png',
+                    
                     iconSize: [25, 41],
                     iconAnchor: [12, 41],
                     popupAnchor: [1, -34],
@@ -251,7 +187,7 @@
 
                 busIcon = DG.icon({
                     iconUrl: 'http://1c.bbus-service.ru/pict/bus_grey.png',
-                    //iconUrl:'https://cdn0.iconfinder.com/data/icons/map-markers-2-1/512/xxx002-512.png',
+                    
                     iconSize: [25, 41],
                     iconAnchor: [12, 41],
                     popupAnchor: [1, -34],
@@ -260,34 +196,26 @@
                     marker.on('click', function (e) {
                         marker.removeFrom(map);
                         clickedElement.innerHTML = 'удаляем:' + e.latlng.lat + ',' + e.latlng.lng;
-                        //delGeo(parseFloat(e.latlng.lat));
+                        
                     })
                 }
                 map.on('click', function (e) {
                     clickedElement.innerHTML = e.latlng.lat + ',' + e.latlng.lng;
-                    //DG.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+                    
                     var marker = DG.marker([e.latlng.lat, e.latlng.lng]);
                     removeMarkerByClick(marker);
                     marker.addTo(map);
                     addGeo(parseFloat(e.latlng.lat), parseFloat(e.latlng.lng));
-                    // map.setView(myCenter(e.latlng.lat));
+                    
                     map.setView([e.latlng.lat, e.latlng.lng]);
                 })
-                //markers.removeFrom(map)
+                
                 geo.lon.forEach((item, index) => {
                     coordinates[0] = item;
                     coordinates[1] = geo.lat[index];
                     var marker = DG.marker(coordinates);
                     removeMarkerByClick(marker);
-                    
-                    // if (index == 0) {
-                    //     marker.setIcon(startIcon);
-                    // } else if (index == geo.lon.length - 2) {
-                    //     marker.setIcon(finishIcon);
-                    // } else if (geo.bus[index]) {
-                    //     marker.setIcon(busIcon);
-                    // }
-                    
+                
                    if (geo.start[index]) {
                          marker.setIcon(startIcon);
                     } else if (geo.finish[index]) {
@@ -295,7 +223,7 @@
                     } else if (geo.bus[index]) {
                         marker.setIcon(busIcon);
                     }
-                   	//marker.addTo(map).bindLabel(geo.popup[index], { static: geo.bus[index] });
+                   	
                     marker.addTo(map).bindLabel(geo.popup[index],{static:geo.staticPopup[index]});
                 })
             });
